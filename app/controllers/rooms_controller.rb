@@ -1,18 +1,23 @@
 class RoomsController < ApplicationController
-  before_action :set_room
+  def start
+    # スタート画面の表示
+  end
 
   def show
-    session[:visited_rooms] ||= []
-    session[:visited_rooms] << @room.id unless session[:visited_rooms].include?(@room.id)
+    @room = Room.find(params[:id])
 
-    if @room.is_ending?
-      redirect_to ending_path(key: @room.ending_key) and return
+    # 開始時にゲーム状態を初期化
+    if @room.start?
+      initialize_game_state
     end
   end
 
   private
 
-  def set_room
-    @room = Room.find(params[:id])
+  def initialize_game_state
+    session[:current_count] = 0
+    session[:visited_rooms] = []
+    session[:always_forward] = true
+    session[:backtrack_count] = 0
   end
 end

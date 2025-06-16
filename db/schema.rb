@@ -10,38 +10,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_15_034922) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_16_083619) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "endings", force: :cascade do |t|
-    t.string "key"
-    t.string "title"
-    t.text "description"
+  create_table "choices", force: :cascade do |t|
+    t.bigint "room_id", null: false
+    t.bigint "next_room_id", null: false
+    t.string "description", null: false
+    t.text "condition"
+    t.boolean "is_backtrack", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["next_room_id"], name: "index_choices_on_next_room_id"
+    t.index ["room_id"], name: "index_choices_on_room_id"
+  end
+
+  create_table "endings", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "title", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "theme_color"
+    t.text "condition"
+    t.index ["key"], name: "index_endings_on_key", unique: true
   end
 
   create_table "puzzles", force: :cascade do |t|
-    t.string "question"
-    t.string "option_a"
-    t.string "option_b"
-    t.string "option_c"
-    t.string "correct_option"
+    t.string "question", null: false
+    t.string "correct_option", null: false
     t.text "explanation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title", null: false
+    t.bigint "room_id"
+    t.json "choices", default: [], null: false
+    t.index ["room_id"], name: "index_puzzles_on_room_id"
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.integer "next_room_id"
-    t.integer "back_room_id"
+    t.string "title", null: false
+    t.text "description", null: false
     t.integer "puzzle_id"
     t.boolean "is_ending", default: false
     t.string "ending_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "room_type", default: 1, null: false
+    t.boolean "is_dark", default: false
+    t.boolean "requires_item", default: false
   end
+
+  add_foreign_key "choices", "rooms"
+  add_foreign_key "choices", "rooms", column: "next_room_id"
+  add_foreign_key "puzzles", "rooms"
 end
