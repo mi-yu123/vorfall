@@ -12,9 +12,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  root 'rooms#show', defaults: { id: 1 }
+  root 'rooms#start'
 
-  resources :rooms, only: [:show]
-  resources :puzzles, only: [:show, :create]
-  get '/endings/:key', to: 'endings#show', as: :'ending'
+  resources :rooms, only: [:show] do
+    collection do
+      get :start
+    end
+  end
 end

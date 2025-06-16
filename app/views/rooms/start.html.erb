@@ -1,0 +1,18 @@
+<div class="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-8">
+  <h1 class="text-6xl mb-12 font-bold text-red-600">祝祭</h1>
+  
+  <div class="max-w-2xl text-center mb-12">
+    <p class="text-xl mb-6">
+      誰も招かれず、誰も帰れない家。<br>
+      あなたは目を覚ますと、見知らぬ場所にいた。
+    </p>
+    
+    <p class="text-lg text-gray-400">
+      ここで行われる「祝祭」は、誰のためのものなのか——
+    </p>
+  </div>
+
+  <%= link_to "play", room_path(Room.start_room), 
+      class: "bg-red-600 hover:bg-red-700 text-white text-xl font-bold py-4 px-12 rounded-lg
+              transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl" %>
+</div>
