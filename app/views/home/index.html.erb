@@ -1,0 +1,23 @@
+<div class="min-h-screen w-[1280px] mx-auto bg-gray-900 text-white flex flex-col items-center justify-center p-8">
+  <div class="w-full max-w-4xl mx-auto text-center">
+    <h1 class="text-8xl mb-16 font-bold text-red-600">祝祭</h1>
+    
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <p class="text-2xl mb-8 leading-relaxed">
+        誰も招かれず、誰も帰れない家。<br>
+        あなたは目を覚ますと、見知らぬ場所にいた。
+      </p>
+      
+      <p class="text-xl text-gray-400 tracking-wider">
+        ここで行われる「祝祭」は、誰のためのものなのか——
+      </p>
+    </div>
+
+    <%= button_to start_game_path, 
+        method: :post,
+        class: "bg-red-600 hover:bg-red-700 text-white text-2xl font-bold py-6 px-16 rounded-lg
+                transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl" do %>
+      PLAY
+    <% end %>
+  </div>
+</div>

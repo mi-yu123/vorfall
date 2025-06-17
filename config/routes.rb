@@ -12,15 +12,15 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  root 'rooms#start'
+  root 'home#index'
 
-  resources :games, only: [] do
+  resources :games, only: [:create, :show] do
     resources :rooms, only: [:show] do
       member do
-        post :make_choice
+        post 'make_choice'
       end
     end
   end
 
-  resources :endings, only: [:show]
+  post 'start_game', to: 'games#create'
 end

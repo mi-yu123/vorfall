@@ -1,9 +1,7 @@
-Room.create!(
-  title: "見知らぬ寝室",
-  description: "目を覚ますと、見知らぬ寝室にいた。\n\n" \
-              "薄暗い室内には、古びた家具が幾つか置かれている。\n" \
-              "壁には、止まったままの古時計。\n" \
-              "どこからともなく、微かな音楽が聞こえてくる。\n\n" \
-              "ここは一体……？",
-  room_type: :start
-)
+GameConstants::ROOMS.each do |key, room_data|
+  Room.create!(
+    title: room_data[:title],
+    description: room_data[:description],
+    room_type: room_data[:room_type]
+  )
+end

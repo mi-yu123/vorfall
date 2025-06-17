@@ -1,14 +1,20 @@
-class GameController < ApplicationController
-  def start
-    @game_state = GameState.create(current_room: Room.find_by(room_type: :start))
-    @game_state.initialize_flags
-    render :show
+class GamesController < ApplicationController
+  def create
+    start_room = Room.find_or_create_by!(
+      title: GameConstants::ROOMS[:start][:title],
+      description: GameConstants::ROOMS[:start][:description],
+      room_type: GameConstants::ROOMS[:start][:room_type]
+    )
+
+    @game_state = GameState.create!(current_room: start_room)
+
+    redirect_to game_room_path(@game_state, start_room)
   end
 
   def show
     @game_state = GameState.find(params[:id])
     @room = @game_state.current_room
-    @choices = available_choices(@room)
+    @choices = RoomTransitionService.new(@room).  available_choices
   end
 
   def make_choice

@@ -7,15 +7,15 @@ module GameConstants
     },
     mirror: {
       title: "女性の部屋（鏡台）",
-      description: "ヒビの入った鏡に"私"が映る。[...]",
-      room_type: :choice
+      description: "ヒビの入った鏡に\"私\"が映る。[...]",
+      room_type: :normal
     },
     doll: {
       title: "子供部屋（人形）",
-      description: "整然と並ぶ人形たち。どれもパーツが欠けている。だが、その欠落はどこか"計画的"に見える。\n" \
+      description: "整然と並ぶ人形たち。どれもパーツが欠けている。だが、その欠落はどこか\"計画的\"に見える。\n" \
                 "私の目、腕、脚。どれかが似ている気がして、息が苦しくなる。\n" \
                 "どれを戻してあげる？",
-      room_type: :choice
+      room_type: :normal
     },
     diary: {
       title: "書斎（日記）",
@@ -29,7 +29,7 @@ module GameConstants
       description: "テレビが勝手に点いている。映っているのはこの家の廊下、階段、今いる部屋——。\n" \
                   "その画面の中で、誰かがゆっくりとこちらを見た。\n" \
                   "……あれは、誰？",
-      room_type: :choice
+      room_type: :normal
     },
     fireplace: {
       title: "リビング（暖炉）",
@@ -49,7 +49,7 @@ module GameConstants
     exit: {
       title: "玄関前",
       description: "長い廊下の先。私の手が、扉のノブに触れている。\n" \
-                  "けれど、扉の先が"外"であるという確信はない。ただ、ここまで来たという事実だけがある。\n" \
+                  "けれど、扉の先が\"外\"であるという確信はない。ただ、ここまで来たという事実だけがある。\n" \
                   "……あなたは、何のためにここまで来たの？",
       room_type: :ending
     }
