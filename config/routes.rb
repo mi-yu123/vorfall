@@ -14,9 +14,13 @@ Rails.application.routes.draw do
 
   root 'rooms#start'
 
-  resources :rooms, only: [:show] do
-    collection do
-      get :start
+  resources :games, only: [] do
+    resources :rooms, only: [:show] do
+      member do
+        post :make_choice
+      end
     end
   end
+
+  resources :endings, only: [:show]
 end

@@ -7,7 +7,7 @@ class Room < ApplicationRecord
     start: 0,    # 開始部屋
     normal: 1,   # 通常部屋
     puzzle: 2,   # 謎解き部屋
-    choice: 3,   # 選択肢部屋
+    corridor: 3,   # 廊下
     ending: 4    # 最終判定部屋
   }
 

@@ -1,21 +1,22 @@
-<div class="min-h-screen bg-gray-900 text-white p-8">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-3xl mb-8 font-bold"><%= @room.title %></h2>
-
-    <div class="prose prose-lg prose-invert mb-12">
-      <%= simple_format(@room.description) %>
+<div class="min-h-screen bg-black text-white p-8">
+  <div class="max-w-2xl mx-auto">
+    <div class="mb-8">
+      <h1 class="text-2xl mb-4"><%= @room.title %></h1>
+      <div class="text-gray-300 whitespace-pre-line">
+        <%= @room.description %>
+      </div>
     </div>
 
-    <%# 寝室（スタート地点）特有の選択肢 %>
-    <% if @room.start? %>
+    <% if @room.puzzle? && @room.puzzle.present? %>
+      <%= render 'puzzles/form', puzzle: @room.puzzle %>
+    <% else %>
       <div class="space-y-4">
-        <%= link_to "ドアを開ける", room_path(@room.next_rooms.first), 
-            class: "block w-full bg-red-600 hover:bg-red-700 text-white text-center font-bold py-3 px-6 rounded-lg
-                    transition duration-300 ease-in-out transform hover:scale-105" %>
-        
-        <%= link_to "もう一度周りを見渡す", room_path(@room),
-            class: "block w-full bg-gray-700 hover:bg-gray-600 text-white text-center font-bold py-3 px-6 rounded-lg
-                    transition duration-300 ease-in-out" %>
+        <% @available_choices.each do |choice| %>
+          <%= button_to choice.description,
+              make_choice_room_path(@room),
+              params: { choice_id: choice.id },
+              class: "w-full bg-gray-800 hover:bg-gray-700 p-4 rounded text-left transition" %>
+        <% end %>
       </div>
     <% end %>
   </div>

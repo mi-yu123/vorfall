@@ -1,0 +1,23 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="bg-gray-800 text-white p-6 rounded-lg shadow-lg">
+    <h1 class="text-2xl mb-4"><%= @room.title %></h1>
+    <div class="whitespace-pre-line mb-6">
+      <%= @room.description %>
+    </div>
+
+    <% if @room.puzzle? %>
+      <div class="bg-gray-700 p-4 rounded-lg mb-6">
+        <h2 class="text-xl mb-2"><%= @room.puzzle.title %></h2>
+        <p class="mb-4"><%= @room.puzzle.question %></p>
+      </div>
+    <% end %>
+
+    <div class="space-y-4">
+      <% @choices.each do |choice| %>
+        <%= button_to choice[:description],
+            make_choice_game_path(@game_state, choice_id: choice.id),
+            class: "w-full bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded" %>
+      <% end %>
+    </div>
+  </div>
+</div>

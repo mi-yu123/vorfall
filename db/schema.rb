@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_16_083619) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_17_044303) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,6 +35,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_16_083619) do
     t.string "theme_color"
     t.text "condition"
     t.index ["key"], name: "index_endings_on_key", unique: true
+  end
+
+  create_table "game_states", force: :cascade do |t|
+    t.bigint "current_room_id", null: false
+    t.json "flags", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["current_room_id"], name: "index_game_states_on_current_room_id"
   end
 
   create_table "puzzles", force: :cascade do |t|
@@ -64,5 +72,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_16_083619) do
 
   add_foreign_key "choices", "rooms"
   add_foreign_key "choices", "rooms", column: "next_room_id"
+  add_foreign_key "game_states", "rooms", column: "current_room_id"
   add_foreign_key "puzzles", "rooms"
 end

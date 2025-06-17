@@ -1,0 +1,26 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="bg-gray-800 text-white p-6 rounded-lg shadow-lg">
+    <h1 class="text-2xl mb-4">廊下</h1>
+    <div class="mb-6 whitespace-pre-line">
+      <% if @game_state.flags["void"] > 2 %>
+        暗闇が深まり、壁の輪郭さえ曖昧になってきている...
+      <% else %>
+        薄暗い廊下が続いている。壁には所々シミのようなものが...
+      <% end %>
+    </div>
+
+    <% if flash[:notice] %>
+      <div class="bg-gray-700 p-4 rounded-lg mb-6 italic">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <div class="space-y-4">
+      <% @choices.each do |choice| %>
+        <%= button_to choice[:description],
+            make_choice_game_room_path(@game_state, @room, choice: choice[:action]),
+            class: "w-full bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded" %>
+      <% end %>
+    </div>
+  </div>
+</div>
