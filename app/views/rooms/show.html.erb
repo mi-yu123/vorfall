@@ -1,21 +1,20 @@
-<div class="min-h-screen bg-gray-900 text-white p-8">
+<div class="min-h-screen w-[1280px] mx-auto bg-gray-900 text-white p-12">
   <div class="max-w-4xl mx-auto">
-    <h2 class="text-3xl mb-8 font-bold"><%= @room.title %></h2>
-
-    <div class="prose prose-lg prose-invert mb-12">
-      <%= simple_format(@room.description) %>
+    <h2 class="text-3xl font-bold mb-8"><%= @room.title %></h2>
+    
+    <div class="mb-12 text-xl leading-relaxed whitespace-pre-line">
+      <%= @room.description %>
     </div>
 
-    <%# 寝室（スタート地点）特有の選択肢 %>
-    <% if @room.start? %>
-      <div class="space-y-4">
-        <%= link_to "ドアを開ける", room_path(@room.next_rooms.first), 
-            class: "block w-full bg-red-600 hover:bg-red-700 text-white text-center font-bold py-3 px-6 rounded-lg
-                    transition duration-300 ease-in-out transform hover:scale-105" %>
-        
-        <%= link_to "もう一度周りを見渡す", room_path(@room),
-            class: "block w-full bg-gray-700 hover:bg-gray-600 text-white text-center font-bold py-3 px-6 rounded-lg
-                    transition duration-300 ease-in-out" %>
+    <% if @choices.present? %>
+      <div class="space-y-6">
+        <% @choices.each do |choice| %>
+          <%= button_to choice[:description],
+              make_choice_game_room_path(@game_state, @room, choice: choice[:description]),
+              method: :post,
+              class: "w-full p-4 text-xl border-2 border-white hover:bg-white hover:text-gray-900
+                     transition-colors duration-300" %>
+        <% end %>
       </div>
     <% end %>
   </div>
